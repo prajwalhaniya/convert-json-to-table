@@ -2,6 +2,7 @@
 
 let form = document.querySelector('#upload');
 let file = document.querySelector('#file');
+let exportButton = document.getElementById('exportButton');
 
 form.addEventListener('submit', handleUpload);
 
@@ -18,8 +19,6 @@ function handleUpload(event) {
 function logFile(event) {
     let str = event.target.result;
     let json = JSON.parse(str);
-    console.log('str');
-    console.log(json);
     CreateTableFromJSON(json);
 }
 
@@ -65,3 +64,5 @@ function CreateTableFromJSON(json) {
     divContainer.innerHTML = '';
     divContainer.appendChild(table);
 }
+
+//TO-DO export function
