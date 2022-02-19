@@ -1,30 +1,36 @@
-function CreateTableFromJSON() {
-    var myBooks = [
-        {
-            'Book ID': '1',
-            'Book Name': 'Computer Architecture',
-            Category: 'Computers',
-            Price: '125.60',
-        },
-        {
-            'Book ID': '2',
-            'Book Name': 'Asp.Net 4 Blue Book',
-            Category: 'Programming',
-            Price: '56.00',
-        },
-        {
-            'Book ID': '3',
-            'Book Name': 'Popular Science',
-            Category: 'Science',
-            Price: '210.40',
-        },
-    ];
+//upload function
+
+let form = document.querySelector('#upload');
+let file = document.querySelector('#file');
+
+form.addEventListener('submit', handleUpload);
+
+function handleUpload(event) {
+    event.preventDefault();
+
+    if (!file.value.length) return;
+
+    let reader = new FileReader();
+    reader.onload = logFile;
+    reader.readAsText(file.files[0]);
+}
+
+function logFile(event) {
+    let str = event.target.result;
+    let json = JSON.parse(str);
+    console.log('str');
+    console.log(json);
+    CreateTableFromJSON(json);
+}
+
+function CreateTableFromJSON(json) {
+    var myJSON = json;
 
     // EXTRACT VALUE FOR HTML HEADER.
     // ('Book ID', 'Book Name', 'Category' and 'Price')
     var col = [];
-    for (var i = 0; i < myBooks.length; i++) {
-        for (var key in myBooks[i]) {
+    for (var i = 0; i < myJSON.length; i++) {
+        for (var key in myJSON[i]) {
             if (col.indexOf(key) === -1) {
                 col.push(key);
             }
@@ -45,12 +51,12 @@ function CreateTableFromJSON() {
     }
 
     // ADD JSON DATA TO THE TABLE AS ROWS.
-    for (var i = 0; i < myBooks.length; i++) {
+    for (var i = 0; i < myJSON.length; i++) {
         tr = table.insertRow(-1);
 
         for (var j = 0; j < col.length; j++) {
             var tabCell = tr.insertCell(-1);
-            tabCell.innerHTML = myBooks[i][col[j]];
+            tabCell.innerHTML = myJSON[i][col[j]];
         }
     }
 

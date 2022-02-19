@@ -6,11 +6,14 @@
         <script defer src="script.js"></script>
     </head>
     <body>
-        <input
-            type="button"
-            onclick="CreateTableFromJSON()"
-            value="Create Table From JSON"
-        />
+        <!-- uploading the file -->
+        <div class="upload-container">
+            <form id="upload">
+                <input type="file" id="file" accept=".json" />
+                <button>Convert JSON to Table</button>
+            </form>
+        </div>
+
         <p id="showData"></p>
     </body>
 </html>
