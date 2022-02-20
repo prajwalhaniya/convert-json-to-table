@@ -25,8 +25,7 @@ function logFile(event) {
 function CreateTableFromJSON(json) {
     var myJSON = json;
 
-    // EXTRACT VALUE FOR HTML HEADER.
-    // ('Book ID', 'Book Name', 'Category' and 'Price')
+    //creating header
     var col = [];
     for (var i = 0; i < myJSON.length; i++) {
         for (var key in myJSON[i]) {
@@ -36,20 +35,16 @@ function CreateTableFromJSON(json) {
         }
     }
 
-    // CREATE DYNAMIC TABLE.
     var table = document.createElement('table');
-
-    // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
-
-    var tr = table.insertRow(-1); // TABLE ROW.
+    var tr = table.insertRow(-1);
 
     for (var i = 0; i < col.length; i++) {
-        var th = document.createElement('th'); // TABLE HEADER.
+        var th = document.createElement('th');
         th.innerHTML = col[i];
         tr.appendChild(th);
     }
 
-    // ADD JSON DATA TO THE TABLE AS ROWS.
+    // adding JSON data to the table as rows
     for (var i = 0; i < myJSON.length; i++) {
         tr = table.insertRow(-1);
 
@@ -59,21 +54,20 @@ function CreateTableFromJSON(json) {
         }
     }
 
-    // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
     var divContainer = document.getElementById('showData');
     divContainer.innerHTML = '';
     divContainer.appendChild(table);
 }
 
-//TO-DO export function
+//export-function
 
 exportButton.addEventListener('click', exportTableToExcel);
 
 function exportTableToExcel(showData, filename = '') {
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById('showData');
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    let downloadLink;
+    let dataType = 'application/vnd.ms-excel';
+    let tableSelect = document.getElementById('showData');
+    let tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
     // Specify file name
     filename = filename ? filename + '.xls' : 'excel_data.xls';
