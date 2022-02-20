@@ -14,14 +14,27 @@
             <form id="upload">
                 <input type="file" id="file" accept=".json" />
                 <button class="buttonClass">Convert JSON to Table</button>
-                <!-- <button class="buttonClass" id="exportButton">
+                <button class="buttonClass" id="exportButton">
                     Export to Excel
-                </button> -->
+                </button>
             </form>
         </div>
 
         <div class="data-container">
             <p id="showData"></p>
         </div>
+
+        <script
+            type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+        ></script>
+        <script src="table2excel.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function Export() {
+                $('showData').table2excel({
+                    filename: 'Table.xls',
+                });
+            }
+        </script>
     </body>
 </html>
