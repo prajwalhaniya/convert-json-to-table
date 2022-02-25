@@ -9,11 +9,15 @@ form.addEventListener('submit', handleUpload);
 function handleUpload(event) {
     event.preventDefault();
 
-    if (!file.value.length) return;
+    if (!file.value.length) {
+        alert('No file uploaded or File is empty');
+        return;
+    }
 
     let reader = new FileReader();
     reader.onload = logFile;
     reader.readAsText(file.files[0]);
+    exportButton.addEventListener('click', exportTableToExcel);
 }
 
 function logFile(event) {
@@ -60,8 +64,6 @@ function CreateTableFromJSON(json) {
 }
 
 //export-function
-
-exportButton.addEventListener('click', exportTableToExcel);
 
 function exportTableToExcel(showData, filename = '') {
     let downloadLink;
